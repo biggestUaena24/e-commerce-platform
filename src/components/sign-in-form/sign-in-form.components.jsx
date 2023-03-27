@@ -1,7 +1,5 @@
 import { useState } from "react";
 import {
-  createAuthUserWithEmailAndPassword,
-  createUserDocument,
   SignInWithGoogle,
   signAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
@@ -19,8 +17,7 @@ const SignInForm = () => {
   const { email, password } = formFields;
 
   const logGoogleUser = async () => {
-    const { user } = await SignInWithGoogle();
-    const userDocRef = await createUserDocument(user);
+    await SignInWithGoogle();
   };
 
   const handleChange = (e) => {
@@ -29,7 +26,7 @@ const SignInForm = () => {
     setFormFields({ ...formFields, [name]: value });
   };
 
-  const resetForm = () => {
+  const resetFormFields = () => {
     setFormFields(FormField);
   };
 
@@ -37,18 +34,21 @@ const SignInForm = () => {
     e.preventDefault();
 
     try {
-      const response = await signAuthUserWithEmailAndPassword(email, password);
-      console.log(response);
+      await signAuthUserWithEmailAndPassword(email, password);
+      resetFormFields();
     } catch (error) {
       switch (error.code) {
         case "auth/wrong-password":
           alert("Wrong password for email");
+          resetFormFields();
           break;
         case "auth/user-not-found":
           alert("User not found");
+          resetFormFields();
           break;
         default:
           alert(error.message);
+          resetFormFields();
       }
     }
   };
