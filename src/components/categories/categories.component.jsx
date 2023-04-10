@@ -1,5 +1,5 @@
 import "./categories.styles.scss";
-import { CategoryItem } from "../category-item/category-item.components";
+import { CategoryItem } from "../directory-item/directory-item.component";
 
 export const Categories = ({ categories }) => {
   return (
