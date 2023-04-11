@@ -1,4 +1,4 @@
-import "./checkout-product.styles.scss";
+import { CheckoutProductContainer } from "./checkout-product.styles";
 import { useContext } from "react";
 import { CartContext } from "../../context/cart.context";
 
@@ -8,7 +8,7 @@ const CheckoutProduct = ({ cartItem }) => {
 
   const { name, price, imageUrl, quantity } = cartItem;
   return (
-    <div className="checkout-product-container">
+    <CheckoutProductContainer>
       <div className="image-container">
         <img src={imageUrl} alt={name} />
       </div>
@@ -29,7 +29,7 @@ const CheckoutProduct = ({ cartItem }) => {
       >
         &#10005;
       </div>
-    </div>
+    </CheckoutProductContainer>
   );
 };
 
